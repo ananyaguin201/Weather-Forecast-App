@@ -41,14 +41,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Weather Dashboard</h1>
-            <div class="weather-input">
-                <input type="text" name="city" id="city_input" placeholder="Enter Your City Name">
-                <button type="button" id="searchBtn"><i class="fa-sharp fa-solid fa-magnifying-glass"></i>Search</button>
-                <button type="button" id="locationBtn"><i class="fa-sharp fa-regular fa-location-dot"></i>Current Location</button>
-            </div>
+        <div class="container">
+    <div class="header">
+        <h1>Weather Dashboard</h1>
+        <div class="weather-input input-dropdown-wrapper"> <!-- Wrapper added here -->
+            <input type="text" name="city" id="city_input" placeholder="Enter Your City Name">
+            <select id="recentCitiesDropdown" size="5"></select> <!-- Added size to restrict visible options -->
+            <button type="button" id="searchBtn"><i class="fa-sharp fa-solid fa-magnifying-glass"></i>Search</button>
+            <button type="button" id="locationBtn"><i class="fa-sharp fa-regular fa-location-dot"></i>Current Location</button>
         </div>
+    </div>
+</div>
     <div class="weather-data">
         <div class="weather-left">
             <div class="card">

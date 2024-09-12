@@ -312,3 +312,42 @@ hr{margin-bottom: 10px;
      grid-template-columns: repeat(2, 1fr);
     }
 }
+.input-dropdown-wrapper {
+    position: relative;
+    width: 100%;
+    transition: all 0.3s ease; 
+}
+
+
+#city_input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px 25px 0 0; /* Rounded corners at the top */
+    color: aliceblue;
+    background-color: var(--bg-color2);
+}
+
+#city_input:focus {
+    outline: none;
+}
+
+#recentCitiesDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color2);
+    color: aliceblue;
+    border: none;
+    border-radius: 0 0 25px 25px; /* Rounded corners at the bottom */
+    display: none; /* Initially hidden */
+    z-index: 1;
+    max-height: 150px; /* Limit the height */
+    overflow-y: auto; /* Scroll if too many items */
+}
+
+.input-dropdown-wrapper.open #recentCitiesDropdown {
+    display: block;
+}
