@@ -25,6 +25,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
         days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'August', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+    // Fetch Air Quality
     fetch(AIR_POLLUTION_API_URL)
         .then(res => res.json())
         .then(data => {
@@ -52,6 +53,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
             alert('Failed to fetch Air Quality Index');
         });
 
+    // Fetch Current Weather
     fetch(WEATHER_API_URL)
         .then(res => res.json())
         .then(data => {
@@ -114,6 +116,7 @@ function getWeatherDetails(name, lat, lon, country, state) {
             alert("Failed to fetch current weather");
         });
 
+    // Fetch 5 Days Forecast
     fetch(FORECAST_API_URL)
         .then(res => res.json())
         .then(data => {
@@ -165,7 +168,13 @@ function getWeatherDetails(name, lat, lon, country, state) {
 // Fetch City Coordinates
 function getCityCoordinates() {
     let cityName = cityInput.value.trim();
-    if (!cityName) return;
+    
+    // Check if the city name is empty
+    if (!cityName) {
+        alert('Please enter a city name before searching.'); // Show error message
+        return; // Stop further execution
+    }
+
     let GEOCODING_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${api_key}`;
     fetch(GEOCODING_API_URL)
         .then(res => res.json())
@@ -184,7 +193,7 @@ function getCityCoordinates() {
         });
 }
 
-// Update Recent Searches
+// Update Recent Searches, Populate Dropdown, Handle Dropdown Selection, etc.
 function updateRecentSearches(cityName) {
     const recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
     if (!recentCities.includes(cityName)) {
@@ -195,7 +204,6 @@ function updateRecentSearches(cityName) {
     populateDropdown();
 }
 
-// Populate Dropdown with Recent Searches
 function populateDropdown() {
     const recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
     recentCitiesDropdown.innerHTML = '';
@@ -207,27 +215,23 @@ function populateDropdown() {
     });
 }
 
-// Handle Dropdown Selection
 function handleDropdownSelection(event) {
     const selectedCity = event.target.value;
     cityInput.value = selectedCity;
     getCityCoordinates();
-    closeDropdown(); // Close dropdown after selection
+    closeDropdown();
 }
 
-// Toggle Dropdown Visibility
 function toggleDropdown() {
     const wrapper = document.querySelector('.input-dropdown-wrapper');
     wrapper.classList.toggle('open');
 }
 
-// Close Dropdown
 function closeDropdown() {
     const wrapper = document.querySelector('.input-dropdown-wrapper');
     wrapper.classList.remove('open');
 }
 
-// Fetch User Coordinates
 function getUserCoordinates() {
     navigator.geolocation.getCurrentPosition(
         position => {
@@ -258,7 +262,7 @@ function getUserCoordinates() {
 // Event Listeners
 searchBtn.addEventListener('click', getCityCoordinates);
 locationBtn.addEventListener('click', getUserCoordinates);
-cityInput.addEventListener('click', toggleDropdown); // Toggle dropdown on click
+cityInput.addEventListener('click', toggleDropdown);
 cityInput.addEventListener('keyup', e => e.key === 'Enter' && getCityCoordinates());
 recentCitiesDropdown.addEventListener('change', handleDropdownSelection);
 window.addEventListener('load', () => {
