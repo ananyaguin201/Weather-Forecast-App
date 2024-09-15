@@ -9,4 +9,7 @@
 
 # Setup: I have installed and set up the version control system i.e. Git for local machine and GitHub for placing my project online for collaboration and track the changes.
 
+# GitHub Repository link is here: https://github.com/ananyaguin201/Weather-Forecast-App.git
+# Please open the link and check the app.
+
 # Integration with Weather API: Used OpenWeatherMap API to fetch the current weather update.
